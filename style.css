@@ -1,0 +1,9 @@
+body {
+    background: whitesmoke;
+}
+
+textarea {
+    padding: 12px 15px !important;
+    font-family: "Monaco", "Menlo", "Consolas", "Courier New", monospace;
+    font-size: 14px !important;
+}

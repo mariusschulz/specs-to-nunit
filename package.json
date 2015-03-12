@@ -1,0 +1,24 @@
+{
+  "name": "specs-to-nunit",
+  "version": "1.0.0",
+  "description": "Converts specification texts to NUnit test method bodies.",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mariusschulz/specs-to-nunit.git"
+  },
+  "author": "Marius Schulz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mariusschulz/specs-to-nunit/issues"
+  },
+  "homepage": "https://github.com/mariusschulz/specs-to-nunit",
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-babel": "^4.0.0",
+    "gulp-rename": "^1.2.0"
+  }
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="content" charset="utf-8" />
+    <title>Specification to NUnit</title>
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+    <div class="container">
+        <div class="col-md-6">
+            <h2>Specification Input</h2>
+
+            <div class="form-group">
+                <textarea class="form-control" id="specification" rows="25" autofocus="autofocus"></textarea>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <h2>NUnit Output</h2>
+
+            <div class="form-group">    
+                <textarea class="form-control" id="tests" rows="25" readonly="readonly"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="vendor/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="vendor/underscore-min.js"></script>
+    <script type="text/javascript" src="converter.js"></script>
+    <script type="text/javascript">
+        (function() {
+            var $specification = $("#specification"),
+                $tests = $("#tests");
+
+            $specification.on("keyup", function() {
+                var specification = $specification.val();
+                var tests = window.convertSpecsToTests(specification);
+
+                $tests.val(tests);
+            });
+        }());
+    </script>
+</body>
+</html>
