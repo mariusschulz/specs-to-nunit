@@ -36,8 +36,8 @@
         ].join("\n");
     }
 
-    function createMethodLinesFromSpec(specification) {
-        let methodName = convertToSymbolName(specification);
+    function createMethodLinesFromSpec(spec) {
+        let methodName = convertToSymbolName(spec);
         
         return _.map([
             "[Test]",
@@ -48,8 +48,8 @@
         ], indent);
     }
 
-    function convertToSymbolName(specification) {
-        let sanitizedName = trim(specification)
+    function convertToSymbolName(spec) {
+        let sanitizedName = trim(spec)
             .replace(/^-+\s*/, "")
             .replace(/[^a-z0-9äöüß ]/ig, "")
             .replace(/\s*$/i, "")
