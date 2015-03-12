@@ -1,6 +1,9 @@
 # specs-to-nunit
 
-Converts specification texts to NUnit test method bodies.
+Converts specification texts to NUnit test method stubs.
+
+
+## Example
 
 These specs …
 
@@ -37,6 +40,6 @@ public class When_a_user_changes_their_password
 ```
 
 
-## Demo
+## Live Demo
 
 You can find a live demo at [https://blog.mariusschulz.com/toolbox](https://blog.mariusschulz.com/toolbox/).
