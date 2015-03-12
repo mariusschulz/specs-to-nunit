@@ -2,6 +2,7 @@
 
 var gulp = require("gulp");
 var babel = require("gulp-babel");
+var uglify = require("gulp-uglify");
 var rename = require("gulp-rename");
 
 var staticFiles = ["index.html", "style.css"];
@@ -11,6 +12,7 @@ var distDir = "./dist/";
 gulp.task("transpile", function() {
     return gulp.src("*.es6")
         .pipe(babel())
+        .pipe(uglify())
         .pipe(rename(function(file) {
             file.extname = ".js";
             return file;
