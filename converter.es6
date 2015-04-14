@@ -25,8 +25,7 @@
             .value();
 
         let className = classSpecs[0] || "TestClass";
-
-        let classLines = new Array();
+        let classLines = [];
 
         if (window.convertSpecsToTestsConfiguration.addTestFixtureAttribute) {
             classLines.push("[TestFixture]");
