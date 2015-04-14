@@ -28,7 +28,7 @@
 
         return [
             "[TestFixture]",
-            "public class " + convertToSymbolName(className),
+            window.convertSpecsToTestsConfiguration.fixtureModifier + " class " + convertToSymbolName(className),
             "{",
             methodLines.join("\n\n"),
             "}",
@@ -41,7 +41,7 @@
         
         return _.map([
             "[Test]",
-            `public void ${methodName}()`,
+            `public ` + window.convertSpecsToTestsConfiguration.testReturnType + ` ${methodName}()`,
             "{",
             indent("throw new System.NotImplementedException();"),
             "}"

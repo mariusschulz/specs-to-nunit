@@ -27,13 +27,13 @@
         <fieldset class="col-md-12">
             <legend>Configuration</legend>
 
-            <label for="modifier">Modifier</label>
+            <label for="modifier">Test Fixture Modifier</label>
             <select id="modifier">
                 <option>public</option>
                 <option>internal</option>
             </select>
 
-            <label for="returnType">Return Type</label>
+            <label for="returnType">Test Return Type</label>
             <select id="returnType">
                 <option>void</option>
                 <option>async Task</option>
@@ -47,14 +47,32 @@
     <script type="text/javascript">
         (function() {
             var $specification = $("#specification"),
-                $tests = $("#tests");
+                $tests = $("#tests"),
+                $modifier = $("#modifier"),
+                $returnType = $("#returnType");
 
-            $specification.on("keyup", function() {
+            $specification.on("keyup", updateSpecs);
+
+            $modifier.on("change", updateConfiguration);
+            $returnType.on("change", updateConfiguration);
+
+            updateConfiguration();
+
+            function updateConfiguration() {
+                window.convertSpecsToTestsConfiguration = {
+                    fixtureModifier: $modifier.val(),
+                    testReturnType: $returnType.val()
+                };
+
+                updateSpecs();
+            }
+
+            function updateSpecs() {
                 var specification = $specification.val();
                 var tests = window.convertSpecsToTests(specification);
 
                 $tests.val(tests);
-            });
+            }
         }());
     </script>
 </body>
