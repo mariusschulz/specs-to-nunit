@@ -23,6 +23,30 @@
                 <textarea class="form-control" id="tests" rows="25" readonly="readonly"></textarea>
             </div>
         </div>
+
+        <fieldset class="col-md-12">
+            <legend>Configuration</legend>
+
+            <label for="modifier">Test Fixture Modifier</label>
+            <select id="modifier">
+                <option>public</option>
+                <option>internal</option>
+            </select>
+
+            <label for="returnType">Test Return Type</label>
+            <select id="returnType">
+                <option>void</option>
+                <option>async Task</option>
+            </select>
+
+            <label for="addTestFixtureAttribute">
+                <input type="checkbox" id="addTestFixtureAttribute" checked>
+                Test Fixture Attribute
+            </label>
+
+            <label for="baseClass">Base Class</label>
+            <input type="text" id="baseClass" placeholder="default: none">
+        </fieldset>
     </div>
 
     <script type="text/javascript" src="vendor/jquery-2.1.3.min.js"></script>
@@ -31,14 +55,38 @@
     <script type="text/javascript">
         (function() {
             var $specification = $("#specification"),
-                $tests = $("#tests");
+                $tests = $("#tests"),
+                $modifier = $("#modifier"),
+                $returnType = $("#returnType"),
+                $addTestFixtureAttribute = $("#addTestFixtureAttribute"),
+                $baseClass = $("#baseClass");
 
-            $specification.on("keyup", function() {
+            $specification.on("keyup", updateSpecs);
+
+            $modifier.on("change", updateConfiguration);
+            $returnType.on("change", updateConfiguration);
+            $addTestFixtureAttribute.on("change", updateConfiguration);
+            $baseClass.on("keyup", updateConfiguration);
+
+            updateConfiguration();
+
+            function updateConfiguration() {
+                window.convertSpecsToTestsConfiguration = {
+                    fixtureModifier: $modifier.val(),
+                    testReturnType: $returnType.val(),
+                    addTestFixtureAttribute: $addTestFixtureAttribute.is(":checked"),
+                    baseClass: $baseClass.val()
+                };
+
+                updateSpecs();
+            }
+
+            function updateSpecs() {
                 var specification = $specification.val();
                 var tests = window.convertSpecsToTests(specification);
 
                 $tests.val(tests);
-            });
+            }
         }());
     </script>
 </body>
