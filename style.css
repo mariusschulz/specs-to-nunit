@@ -7,3 +7,7 @@ textarea {
     font-family: "Monaco", "Menlo", "Consolas", "Courier New", monospace;
     font-size: 14px !important;
 }
+
+label:last-of-type {
+    margin-left: 20px;
+}

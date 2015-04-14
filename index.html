@@ -23,6 +23,22 @@
                 <textarea class="form-control" id="tests" rows="25" readonly="readonly"></textarea>
             </div>
         </div>
+
+        <fieldset class="col-md-12">
+            <legend>Configuration</legend>
+
+            <label for="modifier">Modifier</label>
+            <select id="modifier">
+                <option>public</option>
+                <option>internal</option>
+            </select>
+
+            <label for="returnType">Return Type</label>
+            <select id="returnType">
+                <option>void</option>
+                <option>async Task</option>
+            </select>
+        </fieldset>
     </div>
 
     <script type="text/javascript" src="vendor/jquery-2.1.3.min.js"></script>
