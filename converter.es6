@@ -52,7 +52,7 @@
         
         return _.map([
             "[Test]",
-            `public ` + config.testReturnType + ` ${methodName}()`,
+            `public ${config.testReturnType} ${methodName}()`,
             "{",
             indent("throw new System.NotImplementedException();"),
             "}"
