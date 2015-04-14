@@ -1,5 +1,5 @@
 (function() {
-    window.convertSpecsToTests = function(specs) {
+    window.convertSpecsToTests = function(specs, config) {
         let trimmedSpecs = trim(specs);
 
         if (trimmedSpecs === "") {
@@ -14,28 +14,28 @@
 
         let [methodSpecs, classSpecs] = _.partition(lines, line => line[0] === "-");
 
-        return createClassLinesFromSpec(classSpecs, methodSpecs);
+        return createClassLinesFromSpec(classSpecs, methodSpecs, config);
     };
 
-    function createClassLinesFromSpec(classSpecs, methodSpecs) {
+    function createClassLinesFromSpec(classSpecs, methodSpecs, config) {
         let methodLines = _.chain(methodSpecs)
             .reject(spec => spec === "-")
-            .map(createMethodLinesFromSpec)
+            .map(spec => createMethodLinesFromSpec(spec, config))
             .map(lines => lines.join("\n"))
             .value();
 
         let className = classSpecs[0] || "TestClass";
         let classLines = [];
 
-        if (window.convertSpecsToTestsConfiguration.addTestFixtureAttribute) {
+        if (config.addTestFixtureAttribute) {
             classLines.push("[TestFixture]");
         }
 
-        let mainClassLine = window.convertSpecsToTestsConfiguration.fixtureModifier
+        let mainClassLine = config.fixtureModifier
             + " class " + convertToSymbolName(className);
 
-        if (window.convertSpecsToTestsConfiguration.baseClass.length > 0) {
-            mainClassLine += " : " + window.convertSpecsToTestsConfiguration.baseClass;
+        if (config.baseClass.length > 0) {
+            mainClassLine += " : " + config.baseClass;
         }
 
         classLines.push(mainClassLine);
@@ -47,12 +47,12 @@
         return classLines.join("\n");
     }
 
-    function createMethodLinesFromSpec(spec) {
+    function createMethodLinesFromSpec(spec, config) {
         let methodName = convertToSymbolName(spec);
         
         return _.map([
             "[Test]",
-            `public ` + window.convertSpecsToTestsConfiguration.testReturnType + ` ${methodName}()`,
+            `public ` + config.testReturnType + ` ${methodName}()`,
             "{",
             indent("throw new System.NotImplementedException();"),
             "}"

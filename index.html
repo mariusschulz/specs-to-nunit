@@ -61,6 +61,8 @@
                 $addTestFixtureAttribute = $("#addTestFixtureAttribute"),
                 $baseClass = $("#baseClass");
 
+            var config = {};
+
             $specification.on("keyup", updateSpecs);
 
             $modifier.on("change", updateConfiguration);
@@ -71,19 +73,19 @@
             updateConfiguration();
 
             function updateConfiguration() {
-                window.convertSpecsToTestsConfiguration = {
+                _.assign(config, {
                     fixtureModifier: $modifier.val(),
                     testReturnType: $returnType.val(),
                     addTestFixtureAttribute: $addTestFixtureAttribute.is(":checked"),
                     baseClass: $baseClass.val()
-                };
+                });
 
                 updateSpecs();
             }
 
             function updateSpecs() {
                 var specification = $specification.val();
-                var tests = window.convertSpecsToTests(specification);
+                var tests = window.convertSpecsToTests(specification, config);
 
                 $tests.val(tests);
             }
