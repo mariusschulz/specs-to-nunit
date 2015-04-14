@@ -34,7 +34,7 @@
         let mainClassLine = config.fixtureModifier
             + " class " + convertToSymbolName(className);
 
-        if (config.baseClass.length > 0) {
+        if (config.baseClass) {
             mainClassLine += " : " + config.baseClass;
         }
 
