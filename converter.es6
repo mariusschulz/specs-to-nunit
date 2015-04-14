@@ -26,14 +26,26 @@
 
         let className = classSpecs[0] || "TestClass";
 
-        return [
-            "[TestFixture]",
-            window.convertSpecsToTestsConfiguration.fixtureModifier + " class " + convertToSymbolName(className),
-            "{",
-            methodLines.join("\n\n"),
-            "}",
-            ""
-        ].join("\n");
+        let classLines = new Array();
+
+        if (window.convertSpecsToTestsConfiguration.addTestFixtureAttribute) {
+            classLines.push("[TestFixture]");
+        }
+
+        let mainClassLine = window.convertSpecsToTestsConfiguration.fixtureModifier
+            + " class " + convertToSymbolName(className);
+
+        if (window.convertSpecsToTestsConfiguration.baseClass.length > 0) {
+            mainClassLine += " : " + window.convertSpecsToTestsConfiguration.baseClass;
+        }
+
+        classLines.push(mainClassLine);
+        classLines.push("{");
+        classLines.push(methodLines.join("\n\n"));
+        classLines.push("}");
+        classLines.push("");
+
+        return classLines.join("\n");
     }
 
     function createMethodLinesFromSpec(spec) {

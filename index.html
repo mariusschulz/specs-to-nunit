@@ -38,6 +38,14 @@
                 <option>void</option>
                 <option>async Task</option>
             </select>
+
+            <label for="addTestFixtureAttribute">
+                <input type="checkbox" id="addTestFixtureAttribute" checked>
+                Test Fixture Attribute
+            </label>
+
+            <label for="baseClass">Base Class</label>
+            <input type="text" id="baseClass" placeholder="default: none">
         </fieldset>
     </div>
 
@@ -49,19 +57,25 @@
             var $specification = $("#specification"),
                 $tests = $("#tests"),
                 $modifier = $("#modifier"),
-                $returnType = $("#returnType");
+                $returnType = $("#returnType"),
+                $addTestFixtureAttribute = $("#addTestFixtureAttribute"),
+                $baseClass = $("#baseClass");
 
             $specification.on("keyup", updateSpecs);
 
             $modifier.on("change", updateConfiguration);
             $returnType.on("change", updateConfiguration);
+            $addTestFixtureAttribute.on("change", updateConfiguration);
+            $baseClass.on("keyup", updateConfiguration);
 
             updateConfiguration();
 
             function updateConfiguration() {
                 window.convertSpecsToTestsConfiguration = {
                     fixtureModifier: $modifier.val(),
-                    testReturnType: $returnType.val()
+                    testReturnType: $returnType.val(),
+                    addTestFixtureAttribute: $addTestFixtureAttribute.is(":checked"),
+                    baseClass: $baseClass.val()
                 };
 
                 updateSpecs();

@@ -8,6 +8,10 @@ textarea {
     font-size: 14px !important;
 }
 
-label:last-of-type {
+label {
     margin-left: 20px;
+}
+
+label:first-of-type {
+    margin-left: 0;
 }
